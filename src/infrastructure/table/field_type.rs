@@ -28,7 +28,7 @@ mod field_type {
             struct FieldType {
                 pub id: i64,
                 pub name: String,
-                pub field_type_category_infra: String,
+                pub category: String,
                 pub card_type_id: i64,
             }
 
