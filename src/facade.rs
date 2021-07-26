@@ -21,8 +21,8 @@ mod card_facade {
 
     struct FieldContentVO {
         field_type_id: i64,
-        original_contents: str,
-        plain_text_contents: str,
+        original_contents: String,
+        plain_text_contents: String,
     }
 
     fn get_field_types(card_type_id: i64) -> Vec<FieldTypeVO> {

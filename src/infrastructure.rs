@@ -28,7 +28,14 @@ mod database {
                 mod connection {
                     use std::env;
                     use diesel::{SqliteConnection, Connection};
+                    use std::sync::Mutex;
+                    use lazy_static::lazy_static;
+                    use dotenv::dotenv;
 
+                    lazy_static! {
+                        static ref SQLITE_CONNECTION: Mutex<SqliteConnection> =
+                                Mutex::new(establish_connection());
+                    }
 
                     fn establish_connection() -> SqliteConnection {
                         dotenv().ok();
@@ -42,7 +49,8 @@ mod database {
                 }
                 mod table {
                     mod field_type {
-                        use crate::infrastructure::database::repo::field_type_repo::{FieldTypeQuery, FieldTypeDO};
+                        use crate::infrastructure::database::repo::field_type_repo::{FieldTypeQuery, FieldTypeDO, FieldTypeRepo};
+                        use diesel::Queryable;
 
                         #[derive(Queryable)]
                         struct FieldType {
@@ -54,7 +62,7 @@ mod database {
 
                         struct DieselFieldTypeRepo;
 
-                        impl super::FieldTypeRepo for DieselFieldTypeRepo {
+                        impl FieldTypeRepo for DieselFieldTypeRepo {
                             fn query(field_type_query: FieldTypeQuery) -> Vec<FieldTypeDO> {
                                 todo!()
                             }

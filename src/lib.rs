@@ -1,6 +1,7 @@
 mod infrastructure;
 mod domain;
 mod facade;
+mod dependency;
 
 #[cfg(test)]
 mod tests {
