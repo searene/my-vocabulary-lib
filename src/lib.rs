@@ -1,6 +1,6 @@
-mod facade;
-mod domain;
 mod infrastructure;
+mod domain;
+mod facade;
 
 #[cfg(test)]
 mod tests {

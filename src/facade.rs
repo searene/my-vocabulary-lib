@@ -1,6 +1,6 @@
 mod card_facade {
 
-    pub struct FieldTypeVO {
+    struct FieldTypeVO {
 
         // field type id
         id: i64,
@@ -12,14 +12,14 @@ mod card_facade {
         name: String,
     }
 
-    pub struct SaveCardParamVO {
+    struct SaveCardParamVO {
         word: String,
         book_id: i64,
         card_type_id: i64,
         field_contents: Vec<FieldContentVO>
     }
 
-    pub struct FieldContentVO {
+    struct FieldContentVO {
         field_type_id: i64,
         original_contents: str,
         plain_text_contents: str,
@@ -28,4 +28,8 @@ mod card_facade {
     fn get_field_types(card_type_id: i64) -> Vec<FieldTypeVO> {
         todo!()
     }
+}
+
+pub fn initialize() {
+
 }
