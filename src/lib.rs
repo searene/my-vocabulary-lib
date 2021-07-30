@@ -1,7 +1,10 @@
-mod infrastructure;
 mod domain;
 mod facade;
 mod dependency;
+mod infrastructure;
+
+#[macro_use]
+extern crate diesel;
 
 #[cfg(test)]
 mod tests {

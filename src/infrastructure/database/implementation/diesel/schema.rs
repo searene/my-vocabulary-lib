@@ -48,7 +48,8 @@ table! {
 table! {
     configs (id) {
         id -> Integer,
-        configs -> Nullable<Text>,
+        #[sql_name = "type"]
+        configs_ -> Nullable<Text>,
     }
 }
 
