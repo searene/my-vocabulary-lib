@@ -6,7 +6,7 @@ use diesel::SqliteConnection;
 use diesel::Connection;
 
 lazy_static! {
-    pub static ref SQLITE_CONNECTION: Mutex<SqliteConnection> =
+    pub static ref CONNECTION: Mutex<SqliteConnection> =
             Mutex::new(establish_connection());
 }
 

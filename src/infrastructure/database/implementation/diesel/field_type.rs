@@ -1,7 +1,8 @@
 mod field_type {
     use crate::infrastructure::database::field_type_repo::{FieldTypeQuery, FieldTypeDO, FieldTypeRepo};
-    use diesel::Queryable;
-    use crate::infrastructure::database::implementation::diesel::connection::SQLITE_CONNECTION;
+    use diesel::{Queryable, QueryDsl, RunQueryDsl};
+    use crate::infrastructure::database::implementation::diesel::connection::{CONNECTION};
+    use crate::infrastructure::database::implementation::diesel::schema::field_types::dsl;
 
     #[derive(Queryable)]
     struct FieldType {
@@ -14,8 +15,19 @@ mod field_type {
     struct DieselFieldTypeRepo;
 
     impl FieldTypeRepo for DieselFieldTypeRepo {
-        fn query(field_type_query: FieldTypeQuery) -> Vec<FieldTypeDO> {
-            todo!()
+        fn query_by_id(id: i64) -> FieldTypeDO {
+            let field_type = dsl::field_types.find(id).first(&*CONNECTION.lock().unwrap())
+                .expect(&format!("Error find by id in field_type, id: {}", id));
+            to_field_type_do(field_type)
+        }
+    }
+
+    fn to_field_type_do(field_type: FieldType) -> FieldTypeDO {
+        FieldTypeDO {
+            id: field_type.id,
+            name: field_type.name,
+            category: field_type.category,
+            card_type_id: field_type.card_type_id
         }
     }
 }

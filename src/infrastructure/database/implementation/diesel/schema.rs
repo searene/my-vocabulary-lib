@@ -1,8 +1,8 @@
 table! {
     books (id) {
-        id -> Integer,
-        name -> Nullable<Integer>,
-        contents -> Nullable<Integer>,
+        id -> BigInt,
+        name -> Nullable<BigInt>,
+        contents -> Nullable<BigInt>,
         #[sql_name = "type"]
         type_ -> Nullable<Text>,
     }
@@ -10,26 +10,26 @@ table! {
 
 table! {
     card_instances (id) {
-        id -> Integer,
-        card_id -> Nullable<Integer>,
-        composition_id -> Nullable<Integer>,
+        id -> BigInt,
+        card_id -> Nullable<BigInt>,
+        composition_id -> Nullable<BigInt>,
         due_time -> Nullable<Timestamp>,
-        book_id -> Nullable<Integer>,
+        book_id -> Nullable<BigInt>,
     }
 }
 
 table! {
     card_types (id) {
-        id -> Integer,
+        id -> BigInt,
         name -> Nullable<Text>,
     }
 }
 
 table! {
     cards (id) {
-        id -> Integer,
-        card_type_id -> Nullable<Integer>,
-        book_id -> Nullable<Integer>,
+        id -> BigInt,
+        card_type_id -> Nullable<BigInt>,
+        book_id -> Nullable<BigInt>,
         word -> Nullable<Text>,
         create_time -> Nullable<Timestamp>,
     }
@@ -37,9 +37,9 @@ table! {
 
 table! {
     compositions (id) {
-        id -> Integer,
+        id -> BigInt,
         name -> Nullable<Text>,
-        card_type_id -> Nullable<Integer>,
+        card_type_id -> Nullable<BigInt>,
         front_type_ids -> Nullable<Text>,
         back_type_ids -> Nullable<Text>,
     }
@@ -47,7 +47,7 @@ table! {
 
 table! {
     configs (id) {
-        id -> Integer,
+        id -> BigInt,
         #[sql_name = "type"]
         configs_ -> Nullable<Text>,
     }
@@ -55,30 +55,30 @@ table! {
 
 table! {
     field_types (id) {
-        id -> Integer,
-        name -> Nullable<Text>,
-        category -> Nullable<Text>,
-        card_type_id -> Nullable<Integer>,
+        id -> BigInt,
+        name -> Text,
+        category -> Text,
+        card_type_id -> BigInt,
     }
 }
 
 table! {
     fields (id) {
-        id -> Integer,
+        id -> BigInt,
         original_contents -> Nullable<Text>,
         plain_text_contents -> Nullable<Text>,
-        card_id -> Nullable<Integer>,
-        field_type_id -> Nullable<Integer>,
+        card_id -> Nullable<BigInt>,
+        field_type_id -> Nullable<BigInt>,
     }
 }
 
 table! {
     words (id) {
-        id -> Integer,
-        book_id -> Nullable<Integer>,
+        id -> BigInt,
+        book_id -> Nullable<BigInt>,
         original_word -> Nullable<Text>,
         positions -> Nullable<Text>,
-        status -> Nullable<Integer>,
+        status -> Nullable<BigInt>,
     }
 }
 

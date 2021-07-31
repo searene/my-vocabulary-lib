@@ -1,19 +1,20 @@
-pub enum FieldTypeCategoryInfra {
-    Text,
-    GoogleImage,
-}
+use crate::infrastructure::database::base::BaseQuery;
 
+#[derive(Default)]
 pub struct FieldTypeQuery {
-    id: i64,
-    card_type_id: i64,
+    pub base_query: BaseQuery,
+    pub id: Option<i64>,
+    pub category: Option<String>,
+    pub card_type_id: Option<i64>,
 }
 
 pub struct FieldTypeDO {
-    name: String,
-    field_type_category_infra: FieldTypeCategoryInfra,
-    card_type_id: i64,
+    pub id: i64,
+    pub name: String,
+    pub category: String,
+    pub card_type_id: i64,
 }
 
 pub trait FieldTypeRepo {
-    fn query(field_type_query: FieldTypeQuery) -> Vec<FieldTypeDO>;
+    fn query_by_id(id: i64) -> FieldTypeDO;
 }
