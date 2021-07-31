@@ -1,47 +1,47 @@
 table! {
     books (id) {
         id -> BigInt,
-        name -> Nullable<BigInt>,
-        contents -> Nullable<BigInt>,
+        name -> BigInt,
+        contents -> BigInt,
         #[sql_name = "type"]
-        type_ -> Nullable<Text>,
+        type_ -> Text,
     }
 }
 
 table! {
     card_instances (id) {
         id -> BigInt,
-        card_id -> Nullable<BigInt>,
-        composition_id -> Nullable<BigInt>,
-        due_time -> Nullable<Timestamp>,
-        book_id -> Nullable<BigInt>,
+        card_id -> BigInt,
+        composition_id -> BigInt,
+        due_time -> Timestamp,
+        book_id -> BigInt,
     }
 }
 
 table! {
     card_types (id) {
         id -> BigInt,
-        name -> Nullable<Text>,
+        name -> Text,
     }
 }
 
 table! {
     cards (id) {
         id -> BigInt,
-        card_type_id -> Nullable<BigInt>,
-        book_id -> Nullable<BigInt>,
-        word -> Nullable<Text>,
-        create_time -> Nullable<Timestamp>,
+        card_type_id -> BigInt,
+        book_id -> BigInt,
+        word -> Text,
+        create_time -> Timestamp,
     }
 }
 
 table! {
     compositions (id) {
         id -> BigInt,
-        name -> Nullable<Text>,
-        card_type_id -> Nullable<BigInt>,
-        front_type_ids -> Nullable<Text>,
-        back_type_ids -> Nullable<Text>,
+        name -> Text,
+        card_type_id -> BigInt,
+        front_type_ids -> Text,
+        back_type_ids -> Text,
     }
 }
 
@@ -49,7 +49,7 @@ table! {
     configs (id) {
         id -> BigInt,
         #[sql_name = "type"]
-        configs_ -> Nullable<Text>,
+        configs_ -> Text,
     }
 }
 
@@ -67,18 +67,18 @@ table! {
         id -> BigInt,
         original_contents -> Nullable<Text>,
         plain_text_contents -> Nullable<Text>,
-        card_id -> Nullable<BigInt>,
-        field_type_id -> Nullable<BigInt>,
+        card_id -> BigInt,
+        field_type_id -> BigInt,
     }
 }
 
 table! {
     words (id) {
         id -> BigInt,
-        book_id -> Nullable<BigInt>,
-        original_word -> Nullable<Text>,
-        positions -> Nullable<Text>,
-        status -> Nullable<BigInt>,
+        book_id -> BigInt,
+        original_word -> Text,
+        positions -> Text,
+        status -> BigInt,
     }
 }
 
