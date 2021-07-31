@@ -41,7 +41,7 @@ mod field_type {
     }
 
     fn to_field_type_do_vec(field_type_vec: Vec<FieldType>) -> Vec<FieldTypeDO> {
-        let mut result = Vec::new();
+        let mut result = Vec::with_capacity(field_type_vec.len());
         for field_type in field_type_vec {
             result.push(to_field_type_do(field_type));
         }

@@ -1,5 +1,3 @@
-use crate::infrastructure::database::base::BaseQuery;
-
 #[derive(Default)]
 pub struct FieldTypeDO {
     pub id: i64,

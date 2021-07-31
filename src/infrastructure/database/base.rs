@@ -1,10 +1,5 @@
 #[derive(Default)]
-pub struct BaseQuery {
-    limit: Limit,
-}
-
-#[derive(Default)]
 pub struct Limit {
-    offset: i64,
-    limit: Option<i32>
+    pub offset: i64,
+    pub limit: Option<i32>
 }
