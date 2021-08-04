@@ -1,1 +1,1 @@
-mod diesel;
+pub mod diesel;

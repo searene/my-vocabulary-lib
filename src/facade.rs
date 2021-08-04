@@ -29,7 +29,3 @@ mod card_facade {
         todo!()
     }
 }
-
-pub fn initialize() {
-
-}
