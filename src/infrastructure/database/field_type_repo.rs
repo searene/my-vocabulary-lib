@@ -1,3 +1,5 @@
+use shaku::Interface;
+
 #[derive(Default)]
 pub struct FieldTypeDO {
     pub id: i64,
@@ -6,7 +8,7 @@ pub struct FieldTypeDO {
     pub card_type_id: i64,
 }
 
-pub trait FieldTypeRepo {
-    fn query_by_id(id: i64) -> FieldTypeDO;
-    fn query_by_card_type_id(card_type_id: i64) -> Vec<FieldTypeDO>;
+pub trait FieldTypeRepo: Interface {
+    fn query_by_id(id: i64) -> FieldTypeDO where Self: Sized;
+    fn query_by_card_type_id(card_type_id: i64) -> Vec<FieldTypeDO> where Self: Sized;
 }

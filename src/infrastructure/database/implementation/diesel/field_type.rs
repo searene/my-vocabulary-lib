@@ -5,6 +5,7 @@ mod field_type {
     use crate::infrastructure::database::implementation::diesel::schema::field_types::dsl;
     use crate::infrastructure::database::implementation::diesel::schema::field_types;
     use crate::diesel::ExpressionMethods;
+    use shaku::Component;
 
     #[derive(Queryable)]
     struct FieldType {
@@ -14,6 +15,8 @@ mod field_type {
         pub card_type_id: i64,
     }
 
+    #[derive(Component)]
+    #[shaku(interface = FieldTypeRepo)]
     struct DieselFieldTypeRepo;
 
     impl FieldTypeRepo for DieselFieldTypeRepo {

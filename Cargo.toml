@@ -10,3 +10,4 @@ edition = "2018"
 diesel = { version = "1.4.4", features = ["sqlite"] }
 dotenv = "0.15.0"
 lazy_static = "1.4.0"
+shaku = "0.6.1"
