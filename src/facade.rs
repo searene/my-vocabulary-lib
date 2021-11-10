@@ -1,4 +1,21 @@
 mod card_facade {
+    use shaku::Interface;
+    use crate::infrastructure::database::field_type_repo::FieldTypeDO;
+
+    enum FieldTypeCategory {
+        Text,
+        GoogleImage
+    }
+
+    impl FieldTypeCategory {
+        pub fn from_str(category: &str) -> Result<FieldTypeCategory, String> {
+            match category {
+                "text" => Ok(FieldTypeCategory::Text),
+                "google-image" => Ok(FieldTypeCategory::GoogleImage),
+                _ => Err(format!("Unsupported category: {}", category)),
+            }
+        }
+    }
 
     struct FieldTypeVO {
 
@@ -6,10 +23,20 @@ mod card_facade {
         id: i64,
 
         // field type category
-        category: String,
+        category: FieldTypeCategory,
 
         // field type name
         name: String,
+    }
+
+    impl FieldTypeVO {
+        pub fn from_field_type_do(field_type_do: &FieldTypeDO) -> FieldTypeVO {
+            FieldTypeVO {
+                id: field_type_do.id,
+                category: FieldTypeCategory::from_str(&field_type_do.category).unwrap(),
+                name: field_type_do.name.clone()
+            }
+        }
     }
 
     struct SaveCardParamVO {
@@ -25,7 +52,33 @@ mod card_facade {
         plain_text_contents: String,
     }
 
-    fn get_field_types(card_type_id: i64) -> Vec<FieldTypeVO> {
-        todo!()
+    trait CardFacade: Interface {
+        fn get_field_types(&self, card_type_id: i64) -> Vec<FieldTypeVO>;
     }
+
+    mod implementation {
+        use crate::facade::card_facade::{CardFacade, FieldTypeVO};
+        use crate::infrastructure::database::field_type_repo::{FieldTypeRepo, FieldTypeDO};
+        use shaku::Component;
+        use std::sync::Arc;
+
+        #[derive(Component)]
+        #[shaku(interface = CardFacade)]
+        struct CardFacadeImpl {
+            #[shaku(inject)]
+            field_type_repo: Arc<&'static dyn FieldTypeRepo>
+        }
+
+        impl CardFacade for CardFacadeImpl {
+
+            fn get_field_types(self: &Self, card_type_id: i64) -> Vec<FieldTypeVO> {
+                let field_type_do_vec: Vec<FieldTypeDO> = self.field_type_repo
+                    .query_by_card_type_id(card_type_id);
+                field_type_do_vec.iter()
+                    .map(&FieldTypeVO::from_field_type_do)
+                    .collect()
+            }
+        }
+    }
+
 }
