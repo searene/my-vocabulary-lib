@@ -1,4 +1,4 @@
-mod card_facade {
+pub mod card_facade {
     use shaku::Interface;
     use crate::infrastructure::database::field_type_repo::FieldTypeDO;
 
@@ -17,7 +17,7 @@ mod card_facade {
         }
     }
 
-    struct FieldTypeVO {
+    pub struct FieldTypeVO {
 
         // field type id
         id: i64,
@@ -52,11 +52,11 @@ mod card_facade {
         plain_text_contents: String,
     }
 
-    trait CardFacade: Interface {
+    pub trait CardFacade: Interface {
         fn get_field_types(&self, card_type_id: i64) -> Vec<FieldTypeVO>;
     }
 
-    mod implementation {
+    pub mod implementation {
         use crate::facade::card_facade::{CardFacade, FieldTypeVO};
         use crate::infrastructure::database::field_type_repo::{FieldTypeRepo, FieldTypeDO};
         use shaku::Component;
@@ -64,9 +64,9 @@ mod card_facade {
 
         #[derive(Component)]
         #[shaku(interface = CardFacade)]
-        struct CardFacadeImpl {
+        pub struct CardFacadeImpl {
             #[shaku(inject)]
-            field_type_repo: Arc<&'static dyn FieldTypeRepo>
+            field_type_repo: Arc<dyn FieldTypeRepo>
         }
 
         impl CardFacade for CardFacadeImpl {
